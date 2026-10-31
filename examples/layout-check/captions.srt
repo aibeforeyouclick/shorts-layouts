@@ -1,0 +1,43 @@
+1
+00:00:00,675 --> 00:00:02,450
+Four ways to caption a Short
+
+2
+00:00:02,587 --> 00:00:03,925
+ranked by how easy they are
+
+3
+00:00:03,925 --> 00:00:04,750
+to read
+
+4
+00:00:05,800 --> 00:00:07,950
+Word by word highlight goes in S.
+
+5
+00:00:09,000 --> 00:00:10,325
+Short phrases go in A.
+
+6
+00:00:11,450 --> 00:00:13,650
+A full sentence block goes in C.
+
+7
+00:00:14,650 --> 00:00:16,100
+And no captions at all goes
+
+8
+00:00:16,100 --> 00:00:16,875
+in F.
+
+9
+00:00:17,875 --> 00:00:20,150
+This is our opinion not a study
+
+10
+00:00:21,175 --> 00:00:23,450
+This test uses no personal data
+
+11
+00:00:23,575 --> 00:00:25,050
+and it was not published

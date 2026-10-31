@@ -1,0 +1,6 @@
+# Narration (tools/tts.py). The layout tools and tests need only the standard library.
+kokoro==0.9.4
+soundfile==0.14.0
+numpy==2.5.4
+# English model used by Kokoro's phonemizer:
+# python -m spacy download en_core_web_sm-3.8.0 --direct  (or install the wheel from the spaCy releases page)

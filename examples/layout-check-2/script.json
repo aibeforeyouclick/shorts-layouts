@@ -1,0 +1,36 @@
+{
+  "voice": "am_michael",
+  "speed": 1.05,
+  "gap": 0.4,
+  "lead_in": 0.3,
+  "tail": 1.6,
+  "variety": {"arc": "checklist", "hook_type": "number-promise", "preset": "split+story", "captions": "phrase", "cta": "test-only"},
+  "sources": {
+    "the checklist is our opinion": "example video for this repo; editorial advice, not a measured result"
+  },
+  "privacy": "This test uses no personal data",
+  "split": {
+    "phases": ["p1"],
+    "host": "assets/host.svg",
+    "top": [
+      {"src": "assets/frame.svg"},
+      {"src": "assets/three.svg", "anchor": "checklist", "n": 1, "phase": "p1"}
+    ]
+  },
+  "story": {
+    "phase": "p2",
+    "title": "Three checks before you post",
+    "sub": "our checklist, not a rule",
+    "sub_anchor": "wins",
+    "images": [
+      {"src": "assets/frame.svg", "label": "first frame", "anchor": "frame", "n": 1},
+      {"src": "assets/phone.svg", "label": "real phone", "anchor": "phone", "n": 1},
+      {"src": "assets/three.svg", "label": "three openings", "anchor": "openings", "n": 1}
+    ]
+  },
+  "phases": [
+    {"id": "p1", "lines": ["Three checks before you post a Short.", "This is our own checklist, not a rule."]},
+    {"id": "p2", "lines": ["One, look at the first frame with the sound off.", "Two, read the captions on a real phone.", "Three, make three openings, and keep the one that wins."]},
+    {"id": "p3", "lines": ["This test uses no personal data, and it was not published."]}
+  ]
+}

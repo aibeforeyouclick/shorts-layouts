@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 960">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e2a55"/><stop offset="1" stop-color="#0b1020"/></linearGradient></defs>
+  <rect width="1080" height="960" fill="url(#g)"/>
+  <rect x="360" y="110" width="360" height="700" rx="54" fill="#0b0d12" stroke="#5b6ea8" stroke-width="10"/>
+  <rect x="388" y="150" width="304" height="620" rx="30" fill="#ffd400"/>
+  <text x="540" y="420" font-family="Inter, Segoe UI, sans-serif" font-size="74" font-weight="900" text-anchor="middle" fill="#0b0d12">FIRST</text>
+  <text x="540" y="500" font-family="Inter, Segoe UI, sans-serif" font-size="74" font-weight="900" text-anchor="middle" fill="#0b0d12">FRAME</text>
+  <g transform="translate(470 600)" fill="#0b0d12"><path d="M0 30h30l40-30v120l-40-30H0z"/><path d="M95 30l50 60M145 30l-50 60" stroke="#0b0d12" stroke-width="12" stroke-linecap="round"/></g>
+</svg>

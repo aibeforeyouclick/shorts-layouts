@@ -1,0 +1,356 @@
+[
+ {
+  "word": "Four",
+  "start": 0.675,
+  "end": 0.925,
+  "phase": "p1"
+ },
+ {
+  "word": "ways",
+  "start": 0.925,
+  "end": 1.25,
+  "phase": "p1"
+ },
+ {
+  "word": "to",
+  "start": 1.25,
+  "end": 1.375,
+  "phase": "p1"
+ },
+ {
+  "word": "caption",
+  "start": 1.375,
+  "end": 1.762,
+  "phase": "p1"
+ },
+ {
+  "word": "a",
+  "start": 1.762,
+  "end": 1.875,
+  "phase": "p1"
+ },
+ {
+  "word": "Short",
+  "start": 1.875,
+  "end": 2.45,
+  "phase": "p1"
+ },
+ {
+  "word": "ranked",
+  "start": 2.587,
+  "end": 2.9,
+  "phase": "p1"
+ },
+ {
+  "word": "by",
+  "start": 2.9,
+  "end": 3.075,
+  "phase": "p1"
+ },
+ {
+  "word": "how",
+  "start": 3.075,
+  "end": 3.312,
+  "phase": "p1"
+ },
+ {
+  "word": "easy",
+  "start": 3.312,
+  "end": 3.65,
+  "phase": "p1"
+ },
+ {
+  "word": "they",
+  "start": 3.65,
+  "end": 3.8,
+  "phase": "p1"
+ },
+ {
+  "word": "are",
+  "start": 3.8,
+  "end": 3.925,
+  "phase": "p1"
+ },
+ {
+  "word": "to",
+  "start": 3.925,
+  "end": 4.05,
+  "phase": "p1"
+ },
+ {
+  "word": "read",
+  "start": 4.05,
+  "end": 4.75,
+  "phase": "p1"
+ },
+ {
+  "word": "Word",
+  "start": 5.8,
+  "end": 6.05,
+  "phase": "p2"
+ },
+ {
+  "word": "by",
+  "start": 6.05,
+  "end": 6.225,
+  "phase": "p2"
+ },
+ {
+  "word": "word",
+  "start": 6.225,
+  "end": 6.475,
+  "phase": "p2"
+ },
+ {
+  "word": "highlight",
+  "start": 6.475,
+  "end": 6.875,
+  "phase": "p2"
+ },
+ {
+  "word": "goes",
+  "start": 6.875,
+  "end": 7.175,
+  "phase": "p2"
+ },
+ {
+  "word": "in",
+  "start": 7.175,
+  "end": 7.338,
+  "phase": "p2"
+ },
+ {
+  "word": "S.",
+  "start": 7.338,
+  "end": 7.95,
+  "phase": "p2"
+ },
+ {
+  "word": "Short",
+  "start": 9.0,
+  "end": 9.25,
+  "phase": "p2"
+ },
+ {
+  "word": "phrases",
+  "start": 9.25,
+  "end": 9.675,
+  "phase": "p2"
+ },
+ {
+  "word": "go",
+  "start": 9.675,
+  "end": 9.838,
+  "phase": "p2"
+ },
+ {
+  "word": "in",
+  "start": 9.838,
+  "end": 9.988,
+  "phase": "p2"
+ },
+ {
+  "word": "A.",
+  "start": 9.988,
+  "end": 10.325,
+  "phase": "p2"
+ },
+ {
+  "word": "A",
+  "start": 11.45,
+  "end": 11.537,
+  "phase": "p2"
+ },
+ {
+  "word": "full",
+  "start": 11.537,
+  "end": 11.787,
+  "phase": "p2"
+ },
+ {
+  "word": "sentence",
+  "start": 11.787,
+  "end": 12.225,
+  "phase": "p2"
+ },
+ {
+  "word": "block",
+  "start": 12.225,
+  "end": 12.55,
+  "phase": "p2"
+ },
+ {
+  "word": "goes",
+  "start": 12.55,
+  "end": 12.85,
+  "phase": "p2"
+ },
+ {
+  "word": "in",
+  "start": 12.85,
+  "end": 13.025,
+  "phase": "p2"
+ },
+ {
+  "word": "C.",
+  "start": 13.025,
+  "end": 13.65,
+  "phase": "p2"
+ },
+ {
+  "word": "And",
+  "start": 14.65,
+  "end": 14.775,
+  "phase": "p2"
+ },
+ {
+  "word": "no",
+  "start": 14.775,
+  "end": 14.95,
+  "phase": "p2"
+ },
+ {
+  "word": "captions",
+  "start": 14.95,
+  "end": 15.413,
+  "phase": "p2"
+ },
+ {
+  "word": "at",
+  "start": 15.413,
+  "end": 15.5,
+  "phase": "p2"
+ },
+ {
+  "word": "all",
+  "start": 15.5,
+  "end": 15.75,
+  "phase": "p2"
+ },
+ {
+  "word": "goes",
+  "start": 15.75,
+  "end": 16.1,
+  "phase": "p2"
+ },
+ {
+  "word": "in",
+  "start": 16.1,
+  "end": 16.263,
+  "phase": "p2"
+ },
+ {
+  "word": "F.",
+  "start": 16.263,
+  "end": 16.875,
+  "phase": "p2"
+ },
+ {
+  "word": "This",
+  "start": 17.875,
+  "end": 18.1,
+  "phase": "p3"
+ },
+ {
+  "word": "is",
+  "start": 18.1,
+  "end": 18.225,
+  "phase": "p3"
+ },
+ {
+  "word": "our",
+  "start": 18.225,
+  "end": 18.4,
+  "phase": "p3"
+ },
+ {
+  "word": "opinion",
+  "start": 18.4,
+  "end": 19.05,
+  "phase": "p3"
+ },
+ {
+  "word": "not",
+  "start": 19.15,
+  "end": 19.337,
+  "phase": "p3"
+ },
+ {
+  "word": "a",
+  "start": 19.337,
+  "end": 19.438,
+  "phase": "p3"
+ },
+ {
+  "word": "study",
+  "start": 19.438,
+  "end": 20.15,
+  "phase": "p3"
+ },
+ {
+  "word": "This",
+  "start": 21.175,
+  "end": 21.412,
+  "phase": "p3"
+ },
+ {
+  "word": "test",
+  "start": 21.412,
+  "end": 21.75,
+  "phase": "p3"
+ },
+ {
+  "word": "uses",
+  "start": 21.75,
+  "end": 22.162,
+  "phase": "p3"
+ },
+ {
+  "word": "no",
+  "start": 22.162,
+  "end": 22.437,
+  "phase": "p3"
+ },
+ {
+  "word": "personal",
+  "start": 22.437,
+  "end": 22.875,
+  "phase": "p3"
+ },
+ {
+  "word": "data",
+  "start": 22.875,
+  "end": 23.45,
+  "phase": "p3"
+ },
+ {
+  "word": "and",
+  "start": 23.575,
+  "end": 23.687,
+  "phase": "p3"
+ },
+ {
+  "word": "it",
+  "start": 23.687,
+  "end": 23.762,
+  "phase": "p3"
+ },
+ {
+  "word": "was",
+  "start": 23.762,
+  "end": 23.925,
+  "phase": "p3"
+ },
+ {
+  "word": "not",
+  "start": 23.925,
+  "end": 24.187,
+  "phase": "p3"
+ },
+ {
+  "word": "published",
+  "start": 24.187,
+  "end": 25.05,
+  "phase": "p3"
+ }
+]

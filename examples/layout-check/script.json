@@ -1,0 +1,32 @@
+{
+  "voice": "am_michael",
+  "speed": 1.05,
+  "gap": 0.4,
+  "lead_in": 0.3,
+  "tail": 1.6,
+  "variety": {"arc": "ranking", "hook_type": "question", "preset": "tier-board", "captions": "phrase", "cta": "test-only"},
+  "sources": {
+    "the ranking is our opinion": "example video for this repo; an editorial opinion, not a measured result"
+  },
+  "privacy": "This test uses no personal data",
+  "trials": [
+    {"style": "headline", "text": "Which captions get read", "sub": "four styles, ranked"},
+    {"style": "post", "text": "Four ways to caption a Short, ranked by how easy they read.", "sub": "our opinion, not a study"},
+    {"style": "minimal", "text": "captions, ranked", "sub": "four styles, one phone"}
+  ],
+  "ranking": {
+    "phase": "p2",
+    "title": "CAPTION STYLES",
+    "items": [
+      {"name": "Word by word", "tier": "S", "anchor": "word", "n": 1},
+      {"name": "Short phrases", "tier": "A", "anchor": "phrases", "n": 1},
+      {"name": "Full sentence", "tier": "C", "anchor": "sentence", "n": 1},
+      {"name": "No captions", "tier": "F", "anchor": "captions", "n": 1}
+    ]
+  },
+  "phases": [
+    {"id": "p1", "lines": ["Four ways to caption a Short, ranked by how easy they read."]},
+    {"id": "p2", "lines": ["Word by word highlight goes in S.", "Short phrases go in A.", "A full sentence block goes in C.", "And no captions at all goes in F."]},
+    {"id": "p3", "lines": ["This is our opinion, not a study.", "This test uses no personal data, and it was not published."]}
+  ]
+}

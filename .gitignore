@@ -1,0 +1,9 @@
+node_modules/
+.venv/
+__pycache__/
+**/out/
+**/snapshots/
+*.mp4
+examples/*/vendor/gsap.min.js
+.env
+.env.*

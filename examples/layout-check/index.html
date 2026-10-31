@@ -1,0 +1,107 @@
+<!doctype html>
+<html data-composition-variables='[{"id":"trial","type":"string","label":"Trial version (off/A/B/C)","default":"off"}]' lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <script src="data.js"></script>
+    <style>
+      :root {
+        --bg: #0b1020;
+        --ink: #f4f6fb;
+        --muted: #9aa6c4;
+        --a1: #4f8cff;
+        --a2: #38d6c4;
+        --a3: #ffb547;
+        --card: #141b33;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: var(--bg); }
+      #root {
+        position: relative; width: 100%; height: 100%;
+        font-family: Inter, "Segoe UI", ui-sans-serif, system-ui, sans-serif; color: var(--ink);
+        background: radial-gradient(1200px 900px at 50% 30%, #18234a 0%, var(--bg) 70%);
+      }
+      .clip { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 90px 260px; text-align: center; }
+      .grad { background: linear-gradient(90deg, var(--a1), var(--a2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+      .overline { font-size: 40px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+      .badge { position: absolute; top: 90px; left: 50%; transform: translateX(-50%); font-size: 30px; font-weight: 600; letter-spacing: 0.08em; color: var(--muted); border: 2px solid #2a3560; border-radius: 999px; padding: 10px 28px; z-index: 5; }
+      .pill { display: inline-block; font-size: 46px; font-weight: 700; padding: 18px 40px; border-radius: 999px; background: var(--card); border: 3px solid #2a3560; }
+
+      .big { font-size: 130px; font-weight: 900; line-height: 1.05; letter-spacing: -0.03em; }
+      .mid { font-size: 70px; font-weight: 800; line-height: 1.15; margin-bottom: 40px; }
+
+      #cap { position: absolute; left: 60px; right: 60px; bottom: 230px; height: 160px; z-index: 6; }
+      #cap .line { position: absolute; left: 0; right: 0; bottom: 0; text-align: center; font-size: 62px; font-weight: 800; line-height: 1.2; text-shadow: 0 4px 18px rgba(0,0,0,0.6); opacity: 0; }
+      #cap .w { opacity: 0.35; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="27.325" data-width="1080" data-height="1920">
+      <audio id="vo" src="audio/narration.wav" data-start="0" data-duration="27.325" data-track-index="9"></audio>
+      <div class="badge">AI-GENERATED VOICE</div>
+
+      <section id="p1" class="clip" data-start="0" data-duration="5.425" data-track-index="0">
+        <div id="p1-n" class="big grad">4</div>
+        <div id="p1-t" class="mid">caption styles</div>
+        <div id="p1-chip" class="pill">ranked for a phone</div>
+      </section>
+
+      <section id="p2" class="clip" data-start="5.425" data-duration="12.1" data-track-index="0">
+        <div class="mid">ranking</div>
+      </section>
+
+      <section id="p3" class="clip" data-start="17.525" data-duration="9.8" data-track-index="0">
+        <div id="p3-op" class="mid">Our opinion,<br /><span class="grad">not a study</span></div>
+        <div id="p3-cta" class="pill" style="border-color:var(--a3)">test &middot; not published</div>
+      </section>
+
+      <div id="cap"></div>
+    </div>
+
+    <script>
+      const W = window.WORDS;
+      function at(word, n = 1, offset = 0) {
+        const key = word.toLowerCase();
+        let seen = 0;
+        for (const w of W) {
+          if (w[0].toLowerCase().replace(/[^a-z0-9']/g, "") === key && ++seen === n) return w[1] + offset;
+        }
+        throw new Error("word not in transcript: " + word + " #" + n);
+      }
+
+      const tl = gsap.timeline({ paused: true });
+
+      const cap = document.getElementById("cap");
+      window.CAPTIONS.forEach((c, ci) => {
+        const line = document.createElement("div");
+        line.className = "line";
+        c.words.forEach((i) => {
+          const s = document.createElement("span");
+          s.className = "w";
+          s.textContent = W[i][0] + " ";
+          line.appendChild(s);
+          tl.to(s, { opacity: 1, duration: 0.08 }, W[i][1]);
+        });
+        cap.appendChild(line);
+        const next = window.CAPTIONS[ci + 1];
+        tl.set(line, { opacity: 1 }, c.start - 0.05);
+        tl.set(line, { opacity: 0 }, next ? next.start - 0.06 : c.end + 0.6);
+      });
+
+      tl.from("#p1-t", { y: 40, opacity: 0, duration: 0.4 }, at("caption", 1, -0.1));
+      tl.from("#p1-chip", { y: 40, opacity: 0, duration: 0.4 }, at("ranked", 1, -0.1));
+
+      tl.from("#p3-op", { y: 40, opacity: 0, duration: 0.5 }, at("opinion", 1, -0.3));
+      tl.from("#p3-cta", { scale: 0.6, opacity: 0, duration: 0.45, ease: "back.out(2)" }, at("published", 1, -0.5));
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+    <script src="trials.js"></script>
+    <script src="vendor/trial-hook.js"></script>
+    <script src="ranking-list.data.js"></script>
+    <script src="vendor/ranking-list.js"></script>
+  </body>
+</html>
