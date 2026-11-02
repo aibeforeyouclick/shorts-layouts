@@ -1,6 +1,6 @@
 """Split screen: visuals on top, the host image below, captions on the seam, over one or more consecutive phases.
 
-Reads <video>/script.json "split": {"phases": ["p1", ...], "host": "assets/host.png",
+Reads <video>/script.json "split": {"phases": ["p1", ...], "host": "assets/host.png" or "mascot": "lens" / "lens+clicky",
   "top": [{"src"}, {"src", "anchor", "n", "phase"}, ...]}. The first top visual shows at the start;
 each next one swaps in on its spoken word (counted inside its own phase). Paths are relative to the video folder.
 Needs transcript.json and data.js. Writes vendor/split-screen.js and split-screen.data.js,
@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))  # -I leaves the script
 from layoutlib import check_anchor, check_file, check_phase, fail, install, load, norm
 
 MAX_TOP = 6
+MASCOTS = ("lens", "lens+clicky")  # built into tools/layouts/split-screen.js; lens+clicky needs a "cast"
 
 
 def main(video_dir: Path) -> int:
@@ -31,7 +32,13 @@ def main(video_dir: Path) -> int:
     idx = [order.index(p) for p in phases if p in order]
     if not phases or len(idx) != len(phases) or idx != list(range(idx[0], idx[0] + len(idx))):
         errors.append(f"'phases' must be consecutive phase ids from script.json, got {phases}")
-    errors += check_file("host", s.get("host"), video_dir)
+    if s.get("mascot"):
+        if s["mascot"] not in MASCOTS:
+            errors.append(f"unknown mascot {s['mascot']!r}, use one of {MASCOTS}")
+        elif s["mascot"] == "lens+clicky" and not {"lens", "clicky"} <= set(script.get("cast", {})):
+            errors.append("mascot 'lens+clicky' needs a 'cast' with lens and clicky in script.json")
+    else:
+        errors += check_file("host", s.get("host"), video_dir)
     if not 1 <= len(top) <= MAX_TOP:
         errors.append(f"'top' needs 1 to {MAX_TOP} visuals")
     for i, t in enumerate(top, 1):

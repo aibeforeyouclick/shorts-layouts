@@ -15,10 +15,12 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 
 import check_script  # noqa: E402
+import script_text  # noqa: E402
 import layoutlib  # noqa: E402
 import ranking_list  # noqa: E402
 import split_screen  # noqa: E402
 import storytelling  # noqa: E402
+import sync_index  # noqa: E402
 import trial_reels  # noqa: E402
 
 
@@ -139,6 +141,58 @@ class TestCheckScript(ExampleCase):
     def test_unspoken_privacy_line_fails(self):
         self.edit_script(lambda s: s.update(privacy="We sell nothing"))
         self.assertEqual(run(check_script.main, self.dir)[0], 1)
+
+
+class TestScriptText(unittest.TestCase):
+    def test_cues_and_overrides(self):
+        self.assertEqual(script_text.for_kokoro("Hi [laugh] there"), "Hi there")
+        self.assertEqual(script_text.for_chatterbox("I [read](/x/) it [laugh]"), "I read it [laugh]")
+        self.assertEqual(script_text.caption_words("I [read](/x/) it, [sigh] ok!"), ["I", "read", "it", "ok"])
+        self.assertEqual(script_text.text_of({"who": "lens", "text": "Hello"}), "Hello")
+
+
+class TestDialogue(ExampleCase):
+    example = "layout-check-2"
+
+    def add_line(self, line):
+        self.edit_script(lambda s: s["phases"][0]["lines"].append(line))
+
+    def test_heteronym_warns(self):
+        self.add_line("Read the docs first.")
+        code, out = run(check_script.main, self.dir)
+        self.assertIn("p1: 'read' has two pronunciations", out)
+
+    def test_override_silences_heteronym(self):
+        self.add_line("[Read](/ɹˈid/) the docs first.")
+        self.assertNotIn("p1: 'read'", run(check_script.main, self.dir)[1])
+
+    def test_dialogue_lines_are_checked(self):
+        def to_dialogue(s):
+            s["cast"] = {"lens": {"voice": "am_michael"}, "clicky": {"voice": "af_heart"}}
+            for p in s["phases"]:
+                p["lines"] = [{"who": "lens", "text": t} for t in p["lines"]]
+        self.edit_script(to_dialogue)
+        code, out = run(check_script.main, self.dir)
+        self.assertEqual(code, 0, out)
+
+    def test_mascot_lens_needs_no_host(self):
+        self.edit_script(lambda s: (s["split"].pop("host"), s["split"].update(mascot="lens")))
+        code, out = run(split_screen.main, self.dir)
+        self.assertEqual(code, 0, out)
+
+    def test_duo_needs_a_cast(self):
+        self.edit_script(lambda s: s["split"].update(mascot="lens+clicky"))
+        code, out = run(split_screen.main, self.dir)
+        self.assertEqual(code, 1)
+        self.assertIn("needs a 'cast'", out)
+
+    def test_unknown_mascot_is_refused(self):
+        self.edit_script(lambda s: s["split"].update(mascot="robot"))
+        self.assertEqual(run(split_screen.main, self.dir)[0], 1)
+
+    def test_sync_index(self):
+        code, out = run(sync_index.main, self.dir)
+        self.assertEqual(code, 0, out)
 
 
 if __name__ == "__main__":

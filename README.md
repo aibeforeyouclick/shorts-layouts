@@ -7,7 +7,7 @@ Four reusable layouts for faceless 9:16 Shorts, each packaged as a Claude Code s
 | `/trial-reels` | 3 visually different openings (headline, post card, minimal) of the same short, for trial reels and A/B tests. Same voice and body; only the hook screen changes. |
 | `/ranking-list` | An S-to-F tier board. Each card drops into its row on the word the narrator says. |
 | `/storytelling` | Three images, a title and a subtitle; each image pops in on its spoken word. |
-| `/split-screen` | Visuals on top, a host image below (slow zoom), captions on the seam; the top visual swaps on spoken words. |
+| `/split-screen` | Visuals on top, a host below (an image, a built-in narrator character, or a two-character dialogue), captions on the seam; the top visual swaps on spoken words. |
 
 ![trial-reels: control and 3 openings](docs/images/trial-reels.png)
 ![ranking-list](docs/images/ranking-list.png)
@@ -15,7 +15,7 @@ Four reusable layouts for faceless 9:16 Shorts, each packaged as a Claude Code s
 
 ## How it works
 `examples/<slug>/script.json` (narration lines per phase, sources, layout blocks)
-→ `tools/tts.py` (Kokoro TTS, word timestamps)
+→ `tools/tts.py` (Kokoro TTS, word timestamps; or Chatterbox-Turbo for dialogue)
 → `tools/build_data.py` (`data.js`: words, caption phrases, phase times)
 → a layout tool (`tools/trial_reels.py`, `ranking_list.py`, `storytelling.py`, `split_screen.py`)
 → `hyperframes check` → `hyperframes render`.
@@ -53,12 +53,24 @@ python -I tools/build_data.py examples/<slug>       # data.js, captions.srt
 python -I tools/ranking_list.py examples/<slug>     # or trial_reels / storytelling / split_screen
 python -I tools/check_script.py examples/<slug>     # again: speaking rate per phase
 ```
-Block formats are in each tool's docstring and in `docs/SPEC.md`. With Claude Code, open this folder and call the skill by name; the skill files in `.claude/skills/` walk through the same steps and tell Claude to look at rendered frames before reporting.
+Block formats are in each tool's docstring and in `docs/SPEC.md`.
+
+## Dialogue (two characters)
+Write lines as `{"who": "clicky", "text": "...", "gap": 0.2}` and add a `cast` (one voice per speaker); use `"mascot": "lens+clicky"` in the `split` block. `tts.py` trims each line's silence, so the per-line `gap` sets the comic timing (negative = interruption), and writes `envelope.json` (loudness per frame) that drives the characters' mouths. After changing gaps run `python -I tools/sync_index.py examples/<slug>` before `build_data.py`.
+
+Kokoro works for dialogue out of the box. For a more natural voice set `"engine": "chatterbox"` ([Chatterbox-Turbo](https://github.com/resemble-ai/chatterbox); takes cues like `[laugh]` `[sigh]` `[chuckle]` inside a line). It needs two extra venvs, kept apart from the main one:
+```
+python -m venv chatterbox-venv && chatterbox-venv/bin/pip install chatterbox-tts==0.1.7    # GPU recommended
+python -m venv whisper-venv && whisper-venv/bin/pip install openai-whisper==20250625         # word timings
+export SHORTS_CHATTERBOX_PY=$PWD/chatterbox-venv/bin/python SHORTS_WHISPER_PY=$PWD/whisper-venv/bin/python
+```
+Each speaker needs a reference clip `voices/<who>.wav` (a few seconds of a voice you have the rights to, e.g. Kokoro output; never clone a real person without consent). Lines are cached in `audio/lines/`, so re-timing is instant; give a bad take a new `"seed"`. Chatterbox reads plain words and ignores Kokoro `[word](/phonemes/)` overrides, and it adds Resemble's inaudible Perth watermark to its audio. With Claude Code, open this folder and call the skill by name; the skill files in `.claude/skills/` walk through the same steps and tell Claude to look at rendered frames before reporting.
 
 ## Channel rules the tools enforce
 - Every claim in `script.json` has a source in `sources`. No source, no claim.
 - A `privacy` line that is actually spoken.
-- Numbers spelled out in narration; speaking rate at most 3 words per second per phase.
+- Numbers spelled out in narration; speaking rate at most 3 words per second per phase (3.6 in a dialogue).
+- Words with two pronunciations (read, live, minute...) get a warning unless they carry a Kokoro override such as `[read](/ɹˈid/)`.
 - An "AI-GENERATED VOICE" label stays visible over every layout.
 - Images are your own (drawn, generated or your own screenshots), never someone else's media.
 - Nothing here publishes anything.
@@ -71,7 +83,8 @@ The tests cover the layout tools and checks (standard library only). TTS and ren
 
 ## Limits
 - Tested on Windows 11 with HyperFrames 0.8.147; other platforms are expected to work but were not tested locally.
-- `/split-screen` takes images only (no video host yet).
+- `/split-screen` takes images or the built-in characters (no video host yet).
+- The Chatterbox path was tested on Windows 11 with an NVIDIA GPU (CUDA 12.4); CPU works but is slow. Not covered by the tests.
 - Kokoro downloads its model from Hugging Face on first run.
 
 License: MIT (code). Third-party components keep their own licenses: THIRD_PARTY.md.
